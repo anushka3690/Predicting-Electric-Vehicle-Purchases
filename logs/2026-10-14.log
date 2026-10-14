@@ -1,0 +1,24 @@
+2026-10-14 14:30:49,204 - __main__ - INFO - Data ingestion started
+2026-10-14 14:30:49,205 - __main__ - INFO - Loading training data from: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\raw\train.csv
+2026-10-14 14:30:49,205 - utils.data_loader - INFO - data loading started
+2026-10-14 14:30:52,879 - utils.data_loader - INFO - data loading complete, shape :(668665, 15)
+2026-10-14 14:30:52,880 - __main__ - INFO - Training data loaded successfully. Shape: (668665, 15)
+2026-10-14 14:30:52,881 - __main__ - INFO - Loading testing data from: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\raw\test.csv
+2026-10-14 14:30:52,882 - utils.data_loader - INFO - data loading started
+2026-10-14 14:30:54,242 - utils.data_loader - INFO - data loading complete, shape :(286571, 14)
+2026-10-14 14:30:54,248 - __main__ - INFO - Testing data loaded successfully. Shape: (286571, 14)
+2026-10-14 14:31:05,305 - __main__ - INFO - Ingested training data saved at: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\interim\ingested_train.csv
+2026-10-14 14:31:09,135 - __main__ - INFO - Ingested testing data saved at: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\interim\ingested_test.csv
+2026-10-14 14:31:09,136 - __main__ - INFO - Data ingestion completed successfully
+2026-10-14 14:34:41,479 - __main__ - INFO - Data ingestion started
+2026-10-14 14:34:41,480 - __main__ - INFO - Loading training data from: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\raw\train.csv
+2026-10-14 14:34:41,480 - utils.data_loader - INFO - data loading started
+2026-10-14 14:34:43,969 - utils.data_loader - INFO - data loading complete, shape :(668665, 15)
+2026-10-14 14:34:43,973 - __main__ - INFO - Training data loaded successfully. Shape: (668665, 15)
+2026-10-14 14:34:43,975 - __main__ - INFO - Loading testing data from: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\raw\test.csv
+2026-10-14 14:34:43,978 - utils.data_loader - INFO - data loading started
+2026-10-14 14:34:45,073 - utils.data_loader - INFO - data loading complete, shape :(286571, 14)
+2026-10-14 14:34:45,073 - __main__ - INFO - Testing data loaded successfully. Shape: (286571, 14)
+2026-10-14 14:34:56,237 - __main__ - INFO - Ingested training data saved at: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\interim\ingested_train.csv
+2026-10-14 14:35:06,151 - __main__ - INFO - Ingested testing data saved at: C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\data\interim\ingested_test.csv
+2026-10-14 14:35:06,160 - __main__ - INFO - Data ingestion completed successfully

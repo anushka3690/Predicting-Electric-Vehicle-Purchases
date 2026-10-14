@@ -1,7 +1,12 @@
 *.csv
 *.env
 
+C:\Users\iaman\Desktop\Predicting-Electric-Vehicle-Purchases\logs
 
 
+# Python cache
+
+__pycache__/
+*.py[cod]
 
 

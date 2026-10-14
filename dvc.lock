@@ -1,0 +1,38 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -m src.data_ingestion
+    deps:
+    - path: configs/data_configs.py
+      hash: md5
+      md5: 2d3789a35a54f5b84930468c216ece18
+      size: 1412
+    - path: data/raw/test.csv
+      hash: md5
+      md5: 561b4fa0ab35149606a0591f24209931
+      size: 18298347
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 57201b1bef73bc87476ac6d4a157d170
+      size: 44707646
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: d08c805316b3c649805ed82612426a55
+      size: 3028
+    - path: utils/data_loader.py
+      hash: md5
+      md5: 6fc0700a2b7fa74c6fad00d008fe179d
+      size: 605
+    - path: utils/logger.py
+      hash: md5
+      md5: 62119f6ded04213749ebf90b10ae7434
+      size: 735
+    outs:
+    - path: data/interim/ingested_test.csv
+      hash: md5
+      md5: aac1f55cbc4b2d26a5f8f4d5680c983e
+      size: 18584919
+    - path: data/interim/ingested_train.csv
+      hash: md5
+      md5: 17f1a483fb7141039603b5afbb84d8b5
+      size: 45376312
