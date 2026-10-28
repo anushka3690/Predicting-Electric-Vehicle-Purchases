@@ -1,22 +1,24 @@
 """
-params loader: 
-    load parameters of the model
+Utility for loading parameters from params.yaml
 """
 
 import yaml
-import pathlib as Path
+from pathlib import Path
 from utils.logger import get_logger
+
 
 logger = get_logger(__name__)
 
 
 class ParamsLoader:
+
     def __init__(self):
+
         self.base_dir = Path(__file__).resolve().parent.parent
         self.params_path = self.base_dir / "params.yaml"
 
     def load(self):
-        
+
         try:
             logger.info("Loading parameters from params.yaml")
 
@@ -28,7 +30,9 @@ class ParamsLoader:
             return params
 
         except Exception as e:
+
             logger.error(
-                f"error while loading parameters: {e}"
+                f"Error while loading parameters: {e}"
             )
+
             raise

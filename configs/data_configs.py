@@ -1,27 +1,94 @@
 """
-data configurations that are used to load the data from csv files and save the preprocessed data to csv files.
+Data configurations used to load raw data
+and save intermediate/processed data.
 """
 
 from pathlib import Path
 
+
 class DataConfig:
+
     BASE_DIR = Path(__file__).resolve().parent.parent
 
-    # raw data 
-    TRAIN_PATH = BASE_DIR/"data"/"raw"/"train.csv"
-    TEST_PATH =  BASE_DIR/"data"/"raw"/"test.csv"
+    # --------------------------------
+    # Raw Data
+    # --------------------------------
 
-    # data ingestion outputs 
-    INGESTED_TRAIN_PATH = BASE_DIR/"data"/"interim"/"ingested_train.csv"
-    INGESTED_TEST_PATH = BASE_DIR/"data"/"interim"/"ingested_test.csv"
+    TRAIN_PATH = (
+        BASE_DIR
+        / "data"
+        / "raw"
+        / "train.csv"
+    )
 
-    # feature engineering outputs 
-    FEATURE_TRAIN_PATH = BASE_DIR/"data"/"interim"/"feature_train.csv"
-    FEATURE_TEST_PATH = BASE_DIR/"data"/"interim"/"feature_test.csv"
+    TEST_PATH = (
+        BASE_DIR
+        / "data"
+        / "raw"
+        / "test.csv"
+    )
 
-    # data manipulation
-    FINAL_TRAIN_PATH = BASE_DIR/"data"/"processed"/"final_train_path.csv"
-    FINAL_TEST_PATH = BASE_DIR/"data"/"processed"/"final_test_path.csv"
+
+    # --------------------------------
+    # Data Ingestion Outputs
+    # --------------------------------
+
+    INGESTED_TRAIN_PATH = (
+        BASE_DIR
+        / "data"
+        / "interim"
+        / "ingested_train.csv"
+    )
+
+    INGESTED_TEST_PATH = (
+        BASE_DIR
+        / "data"
+        / "interim"
+        / "ingested_test.csv"
+    )
+
+
+    # --------------------------------
+    # Feature Engineering Outputs
+    # --------------------------------
+
+    FEATURED_TRAIN_PATH = (
+        BASE_DIR
+        / "data"
+        / "interim"
+        / "train.csv"
+    )
+
+    FEATURED_TEST_PATH = (
+        BASE_DIR
+        / "data"
+        / "interim"
+        / "test.csv"
+    )
+
+
+    # --------------------------------
+    # Data Manipulation Outputs
+    # --------------------------------
+
+    PROCESSED_TRAIN_PATH = (
+        BASE_DIR
+        / "data"
+        / "processed"
+        / "train_processed.csv"
+    )
+
+    PROCESSED_TEST_PATH = (
+        BASE_DIR
+        / "data"
+        / "processed"
+        / "test_processed.csv"
+    )
+
+
+    # --------------------------------
+    # Important Columns
+    # --------------------------------
 
     TARGET_COLUMN = "Will_Buy_EV"
     ID_COLUMN = "id"

@@ -5,8 +5,8 @@ stages:
     deps:
     - path: configs/data_configs.py
       hash: md5
-      md5: 2d3789a35a54f5b84930468c216ece18
-      size: 1412
+      md5: c45f31a8f59fc485ca531546b3b58657
+      size: 2241
     - path: data/raw/test.csv
       hash: md5
       md5: 561b4fa0ab35149606a0591f24209931
@@ -21,8 +21,8 @@ stages:
       size: 3028
     - path: utils/data_loader.py
       hash: md5
-      md5: 6fc0700a2b7fa74c6fad00d008fe179d
-      size: 605
+      md5: 11ee8d419b7df3c04dc9ecdff45b6ba3
+      size: 643
     - path: utils/logger.py
       hash: md5
       md5: 62119f6ded04213749ebf90b10ae7434
@@ -36,3 +36,290 @@ stages:
       hash: md5
       md5: 17f1a483fb7141039603b5afbb84d8b5
       size: 45376312
+  feature_engineering:
+    cmd: python -m src.feature_engineering
+    deps:
+    - path: configs/data_configs.py
+      hash: md5
+      md5: c45f31a8f59fc485ca531546b3b58657
+      size: 2241
+    - path: data/interim/ingested_test.csv
+      hash: md5
+      md5: aac1f55cbc4b2d26a5f8f4d5680c983e
+      size: 18584919
+    - path: data/interim/ingested_train.csv
+      hash: md5
+      md5: 17f1a483fb7141039603b5afbb84d8b5
+      size: 45376312
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: b6704376ec735c8f91f4974c5217e699
+      size: 6842
+    - path: utils/data_loader.py
+      hash: md5
+      md5: 11ee8d419b7df3c04dc9ecdff45b6ba3
+      size: 643
+    - path: utils/logger.py
+      hash: md5
+      md5: 62119f6ded04213749ebf90b10ae7434
+      size: 735
+    outs:
+    - path: data/interim/test.csv
+      hash: md5
+      md5: 9a27166685e28c8bf7a70d43da3aa532
+      size: 40928813
+    - path: data/interim/train.csv
+      hash: md5
+      md5: 379543daac4f95b17bbc47ab077d3788
+      size: 97515989
+  data_manipulation:
+    cmd: python -m src.data_manipulation
+    deps:
+    - path: configs/data_configs.py
+      hash: md5
+      md5: c45f31a8f59fc485ca531546b3b58657
+      size: 2241
+    - path: data/interim/test.csv
+      hash: md5
+      md5: 9a27166685e28c8bf7a70d43da3aa532
+      size: 40928813
+    - path: data/interim/train.csv
+      hash: md5
+      md5: 379543daac4f95b17bbc47ab077d3788
+      size: 97515989
+    - path: src/data_manipulation.py
+      hash: md5
+      md5: 332c6929373e6dcb86abec4568fce594
+      size: 5475
+    - path: utils/data_loader.py
+      hash: md5
+      md5: 11ee8d419b7df3c04dc9ecdff45b6ba3
+      size: 643
+    - path: utils/logger.py
+      hash: md5
+      md5: 62119f6ded04213749ebf90b10ae7434
+      size: 735
+    - path: utils/params_loader.py
+      hash: md5
+      md5: 277f6b5e02168384d3acddd6c266c08f
+      size: 816
+    params:
+      params.yaml:
+        data_manipulation:
+          train_drop_features:
+          - Will_Buy_EV_num
+          - Home_Charging_Possible
+          - Subsidy_Available
+          - No_Home_Charging
+          - Gender
+          test_drop_features:
+          - Home_Charging_Possible
+          - Subsidy_Available
+          - No_Home_Charging
+          - Gender
+          drop_duplicates: true
+    outs:
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: 8339df6df002a1662779bc3b32ec1f29
+      size: 36055569
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 2cbb60ce6e6440029cca6b93a7b285db
+      size: 86145281
+  model_training:
+    cmd: python -m src.model_training
+    deps:
+    - path: configs/data_configs.py
+      hash: md5
+      md5: c45f31a8f59fc485ca531546b3b58657
+      size: 2241
+    - path: configs/model_configs.py
+      hash: md5
+      md5: 8e942b60cba12b059d8613d8389780ff
+      size: 1669
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 2cbb60ce6e6440029cca6b93a7b285db
+      size: 86145281
+    - path: src/model_training.py
+      hash: md5
+      md5: a90076348239a33a92d9522a5289d7d4
+      size: 11987
+    - path: utils/data_loader.py
+      hash: md5
+      md5: 11ee8d419b7df3c04dc9ecdff45b6ba3
+      size: 643
+    - path: utils/logger.py
+      hash: md5
+      md5: 62119f6ded04213749ebf90b10ae7434
+      size: 735
+    - path: utils/params_loader.py
+      hash: md5
+      md5: 277f6b5e02168384d3acddd6c266c08f
+      size: 816
+    params:
+      params.yaml:
+        model_training:
+          split:
+            test_size: 0.2
+            random_state: 42
+            stratify: true
+          preprocessing:
+            skewed_columns:
+            - Number_of_Cars_Owned
+            - Charging_Stations_Near_Home
+            - Charging_Stations_Near_Work
+          xgboost:
+            n_estimators: 400
+            max_depth: 4
+            learning_rate: 0.08
+            min_child_weight: 10
+            gamma: 0.3
+            subsample: 0.8
+            colsample_bytree: 0.9
+            reg_alpha: 0.1
+            reg_lambda: 3
+            scale_pos_weight: 4.73
+            objective: binary:logistic
+            eval_metric: auc
+            random_state: 42
+            n_jobs: -1
+    outs:
+    - path: models/label_encoder.pkl
+      hash: md5
+      md5: 04b236635725167244ed8e5494adb99a
+      size: 537
+    - path: models/model.pkl
+      hash: md5
+      md5: 2adbb4ac231445cb05797b1cf737e0ef
+      size: 671695
+  model_evaluation:
+    cmd: python -m src.model_evaluation
+    deps:
+    - path: configs/data_configs.py
+      hash: md5
+      md5: c45f31a8f59fc485ca531546b3b58657
+      size: 2241
+    - path: configs/model_configs.py
+      hash: md5
+      md5: 8e942b60cba12b059d8613d8389780ff
+      size: 1669
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: 8339df6df002a1662779bc3b32ec1f29
+      size: 36055569
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 2cbb60ce6e6440029cca6b93a7b285db
+      size: 86145281
+    - path: models/label_encoder.pkl
+      hash: md5
+      md5: 04b236635725167244ed8e5494adb99a
+      size: 537
+    - path: models/model.pkl
+      hash: md5
+      md5: 2adbb4ac231445cb05797b1cf737e0ef
+      size: 671695
+    - path: src/model_evaluation.py
+      hash: md5
+      md5: 57a4d6007a55d09d82edb33837ea3b0f
+      size: 18958
+    - path: utils/data_loader.py
+      hash: md5
+      md5: 11ee8d419b7df3c04dc9ecdff45b6ba3
+      size: 643
+    - path: utils/logger.py
+      hash: md5
+      md5: 62119f6ded04213749ebf90b10ae7434
+      size: 735
+    - path: utils/params_loader.py
+      hash: md5
+      md5: 277f6b5e02168384d3acddd6c266c08f
+      size: 816
+    params:
+      params.yaml:
+        model_evaluation:
+          cross_validation:
+            n_splits: 5
+            shuffle: true
+            random_state: 42
+          hyperparameter_tuning:
+            n_iter: 25
+            scoring: roc_auc
+            random_state: 42
+            n_jobs: -1
+            verbose: 2
+            n_estimators:
+            - 200
+            - 300
+            - 400
+            - 500
+            - 700
+            max_depth:
+            - 2
+            - 3
+            - 4
+            - 5
+            learning_rate:
+            - 0.01
+            - 0.02
+            - 0.03
+            - 0.05
+            - 0.08
+            min_child_weight:
+            - 3
+            - 5
+            - 8
+            - 10
+            - 15
+            gamma:
+            - 0
+            - 0.1
+            - 0.2
+            - 0.3
+            - 0.5
+            subsample:
+            - 0.6
+            - 0.7
+            - 0.8
+            - 0.9
+            colsample_bytree:
+            - 0.6
+            - 0.7
+            - 0.8
+            - 0.9
+            reg_alpha:
+            - 0
+            - 0.1
+            - 0.3
+            - 0.5
+            - 1
+            reg_lambda:
+            - 1
+            - 2
+            - 3
+            - 5
+            - 8
+            - 10
+        model_training.split:
+          test_size: 0.2
+          random_state: 42
+          stratify: true
+    outs:
+    - path: artifacts/best_params.json
+      hash: md5
+      md5: f9ac1fd0befbdfb12363cb345114dfb1
+      size: 269
+    - path: artifacts/metrics.json
+      hash: md5
+      md5: c4ff205592f4716fe4d405dcdd547920
+      size: 758
+    - path: artifacts/submission.csv
+      hash: md5
+      md5: 974c0187f7ef0518b83ebbe1ca36626a
+      size: 5553589
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 8cac377a3c3c88df15a2d6676e8786a4
+      size: 674855

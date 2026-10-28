@@ -1,2 +1,140 @@
-# it has all the parameters of the project: hyperparameters, etc.
+# it has all the parameters of the project: hyperparameters
 
+data_manipulation:
+
+  train_drop_features:
+    - Will_Buy_EV_num
+    - Home_Charging_Possible
+    - Subsidy_Available
+    - No_Home_Charging
+    - Gender
+
+  test_drop_features:
+    - Home_Charging_Possible
+    - Subsidy_Available
+    - No_Home_Charging
+    - Gender
+
+  drop_duplicates: true
+
+
+model_training:
+
+  split:
+    test_size: 0.20
+    random_state: 42
+    stratify: true
+
+
+  preprocessing:
+
+    skewed_columns:
+      - Number_of_Cars_Owned
+      - Charging_Stations_Near_Home
+      - Charging_Stations_Near_Work
+
+
+  xgboost:
+
+    n_estimators: 400
+
+    max_depth: 4
+
+    learning_rate: 0.08
+
+    min_child_weight: 10
+
+    gamma: 0.3
+
+    subsample: 0.8
+
+    colsample_bytree: 0.9
+
+    reg_alpha: 0.1
+
+    reg_lambda: 3
+
+    scale_pos_weight: 4.73
+
+    objective: binary:logistic
+
+    eval_metric: auc
+
+    random_state: 42
+
+    n_jobs: -1
+
+model_evaluation:
+
+  cross_validation:
+    n_splits: 5
+    shuffle: true
+    random_state: 42
+
+  hyperparameter_tuning:
+    n_iter: 25
+    scoring: roc_auc
+    random_state: 42
+    n_jobs: -1
+    verbose: 2
+
+    n_estimators:
+      - 200
+      - 300
+      - 400
+      - 500
+      - 700
+
+    max_depth:
+      - 2
+      - 3
+      - 4
+      - 5
+
+    learning_rate:
+      - 0.01
+      - 0.02
+      - 0.03
+      - 0.05
+      - 0.08
+
+    min_child_weight:
+      - 3
+      - 5
+      - 8
+      - 10
+      - 15
+
+    gamma:
+      - 0
+      - 0.1
+      - 0.2
+      - 0.3
+      - 0.5
+
+    subsample:
+      - 0.6
+      - 0.7
+      - 0.8
+      - 0.9
+
+    colsample_bytree:
+      - 0.6
+      - 0.7
+      - 0.8
+      - 0.9
+
+    reg_alpha:
+      - 0
+      - 0.1
+      - 0.3
+      - 0.5
+      - 1
+
+    reg_lambda:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 8
+      - 10
